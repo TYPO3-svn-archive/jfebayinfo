@@ -1,0 +1,96 @@
+plugin.tx_jfebayinfo_pi1 {
+
+	appId = {$plugin.tx_jfebayinfo_pi1.appId}
+	timeout = {$plugin.tx_jfebayinfo_pi1.timeout}
+
+	cacheTime = {$plugin.tx_jfebayinfo_pi1.cacheTime}
+	cacheFolder = {$plugin.tx_jfebayinfo_pi1.cacheFolder}
+	cacheFile = {$plugin.tx_jfebayinfo_pi1.cacheFile}
+
+	requestUrl = COA
+	requestUrl {
+		10 = TEXT
+		10 {
+			value = http://svcs.ebay.com/services/search/FindingService/v1
+		}
+		20 = TEXT
+		20 {
+			wrap = ?OPERATION-NAME=|
+			value = findItemsByKeywords
+		}
+		30 = TEXT
+		30 {
+			wrap = &SERVICE-VERSION=|
+			value = 1.0.0
+		}
+		40 = TEXT
+		40 {
+			wrap = &SECURITY-APPNAME=|
+			value = {$plugin.tx_jfebayinfo_pi1.appId}
+		}
+		50 = TEXT
+		50 {
+			wrap = &GLOBAL-ID=|
+			value = {$plugin.tx_jfebayinfo_pi1.globalId}
+		}
+		60 = TEXT
+		60 {
+			wrap = &keywords=|
+			value = {$plugin.tx_jfebayinfo_pi1.keywords}
+		}
+		70 = TEXT
+		70 {
+			wrap = &paginationInput.entriesPerPage=|
+			value = 10
+		}
+	}
+
+	stdWrap {
+		wrap = <ul> | </ul>
+	}
+
+	content = COA
+	content {
+		10 = TEXT
+		10 {
+			value = <img src="{field:item_galleryURL}" alt="{field:item_title}" /><a href="{field:item_viewItemURL}">{field:item_title}</a><span>{field:item_subtitle}</span>
+			insertData = 1
+		}
+		wrap = <li class="ebay_item"> | </li>
+	}
+
+/*
+Possible fields:
+item_itemId
+item_title
+item_globalId
+item_subtitle
+item_primaryCategory_categoryId
+item_primaryCategory_categoryName
+item_secondaryCategory_categoryId
+item_secondaryCategory_categoryName
+item_galleryURL
+item_viewItemURL
+item_paymentMethod
+item_autoPay
+item_postalCode
+item_location
+item_country
+item_shippingInfo_shippingType
+item_shippingInfo_shipToLocations
+item_sellingStatus_currentPrice
+item_sellingStatus_convertedCurrentPrice
+item_sellingStatus_sellingState
+item_sellingStatus_timeLeft
+item_listingInfo_bestOfferEnabled
+item_listingInfo_buyItNowAvailable
+item_listingInfo_startTime
+item_listingInfo_endTime
+item_listingInfo_listingType
+item_listingInfo_gift
+item_condition_conditionId
+item_condition_conditionDisplayName
+item_isMultiVariationListing
+item_topRatedListing
+*/
+}

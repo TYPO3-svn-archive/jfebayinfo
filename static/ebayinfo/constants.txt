@@ -1,0 +1,25 @@
+plugin.tx_jfebayinfo_pi1 {
+
+	# cat=plugin.tx_jfebayinfo//010; type=string; label=ebay appId
+	appId =
+
+	# cat=plugin.tx_jfebayinfo//020; type=string; label=Global ID
+	globalId = EBAY-DE
+
+	# cat=plugin.tx_jfebayinfo//030; type=string; label=Keyword to search
+	keywords = typo3
+
+	# cat=plugin.tx_jfebayinfo//040; type=string; label=ebay request timeout
+	timeout = 20
+
+
+
+	# cat=plugin.tx_jfebayinfo//050; type=string; label=Cache in seconds
+	cacheTime = 600
+
+	# cat=plugin.tx_jfebayinfo//060; type=string; label=Cache folder
+	cacheFolder = uploads/tx_jfebayinfo/
+
+	# cat=plugin.tx_jfebayinfo//070; type=string; label=Cache file
+	cacheFile = jfebayinfo.xml
+}

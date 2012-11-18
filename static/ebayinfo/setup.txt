@@ -46,18 +46,40 @@ plugin.tx_jfebayinfo_pi1 {
 	}
 
 	stdWrap {
-		wrap = <ul> | </ul>
+		wrap = <table class="ebay_item"> | </table>
 	}
 
 	content = COA
 	content {
 		10 = TEXT
 		10 {
-			value = <img src="{field:item_galleryURL}" alt="{field:item_title}" /><a href="{field:item_viewItemURL}">{field:item_title}</a><span>{field:item_subtitle}</span>
+			value (
+			<td class="ebay_image">
+				<img src="{field:item_galleryURL}" alt="{field:item_title}" />
+			</td>
+			<td class="ebay_text">
+				<a href="{field:item_viewItemURL}">{field:item_title}</a>
+				<div>{field:item_subtitle}</div>
+			</td>
+			<td class="ebay_price">
+				{field:item_sellingStatus_convertedCurrentPrice}
+			</td>
+			)
 			insertData = 1
 		}
-		wrap = <li class="ebay_item"> | </li>
+		wrap = <tr> | </tr>
 	}
+
+	_CSS_DEFAULT_STYLE (
+.ebay_item td {
+	vertical-align: top;
+	height: 140px;
+}
+.ebay_item .ebay_price {
+	vertical-align: top;
+	text-align: right;
+}
+	)
 
 /*
 Possible fields:

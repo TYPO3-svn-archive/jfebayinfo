@@ -109,7 +109,15 @@ class tx_jfebayinfo_pi1 extends tslib_pibase
 			$content = "No success request! Please try again later";
 		}
 
-		$content = $this->cObj->stdWrap($content, $this->conf['stdWrap.']);
+		$version = class_exists('t3lib_utility_VersionNumber')
+			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
+			: t3lib_div::int_from_ver(TYPO3_version);
+
+		if ($version >= 6000000) {
+			return $content;
+		} else {
+			return $this->cObj->stdWrap($content, $this->conf['stdWrap.']);
+		}
 
 		return $this->pi_wrapInBaseClass($content);
 	}
